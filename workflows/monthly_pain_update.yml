@@ -1,0 +1,31 @@
+name: Monthly Pain Journal Update
+
+on:
+  schedule:
+    - cron: '0 16 1 * *'  # At 10 AM EST the 1st of every month
+  workflow_dispatch:      # Allow manual runs too
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run Spine Journal Update
+      env:
+        NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      run: python spine_journal_update.py
