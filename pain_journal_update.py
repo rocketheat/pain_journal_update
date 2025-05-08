@@ -17,11 +17,12 @@ load_dotenv()
 
 # --- Configuration ---
 FEEDS = {
-    'The Spine Journal': 'https://www.thespinejournalonline.com/current.rss',
-    'Journal of Neurosurgery: Spine': 'https://thejns.org/journalissuetocrss/journals/j-neurosurg-spine/j-neurosurg-spine-overview.xml',
-    'Spine': 'https://journals.lww.com/spinejournal/_layouts/15/OAKS.Journals/feed.aspx?FeedType=CurrentIssue',
-    'Neurosurgery': 'https://journals.lww.com/neurosurgery/_layouts/15/OAKS.Journals/feed.aspx?FeedType=CurrentIssue',
-    'World Neurosurgery': 'https://rss.sciencedirect.com/publication/science/18788750'
+    'Interventional Pain Medicine': 'https://rss.sciencedirect.com/publication/science/27725944',
+    'Regional Anesthesia & Pain Medicine': 'https://rapm.bmj.com/rss/current.xml',
+    'Pain Medicine': 'https://academic.oup.com/rss/site_5414/3275.xml',
+    'Pain Practice': 'https://onlinelibrary.wiley.com/action/showFeed?jc=15332500&type=etoc&feed=rss',
+    'Pain': 'https://journals.lww.com/pain/_layouts/15/OAKS.Journals/feed.aspx?FeedType=CurrentIssue',
+    'Journal of Pain Research': 'https://www.tandfonline.com/feed/rss/djpr20'
 }
 
 # Keywords for filtering spine-related articles from general neurosurgery publications
@@ -580,10 +581,10 @@ def main():
             description = getattr(entry, 'description', '')
 
             # For Neurosurgery and World Neurosurgery journal, apply spine filter
-            if journal == 'Neurosurgery' and not is_spine_related(title, description):
-                continue
-            if journal == 'World Neurosurgery' and not is_spine_related(title, description):
-                continue
+            # if journal == 'Neurosurgery' and not is_spine_related(title, description):
+            #     continue
+            # if journal == 'World Neurosurgery' and not is_spine_related(title, description):
+            #     continue
 
             pmid = get_pmid(title, journal)
 
